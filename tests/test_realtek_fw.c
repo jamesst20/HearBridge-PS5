@@ -6,6 +6,7 @@
 
 #include "hci.h"
 #include "realtek_fw.h"
+#include "rtl_fw_blobs.h"
 
 static int failures;
 #define CHECK(c, ...) do { if (!(c)) { failures++; printf("FAIL %s:%d: ", __FILE__, __LINE__); printf(__VA_ARGS__); printf("\n"); } } while (0)
@@ -285,16 +286,18 @@ static void test_ensure(const char *dir)
 {
     char path[512];
     struct stat st;
+    size_t i;
     int n;
 
     CHECK(dir && dir[0], "ensure dir argument");
     n = hb_rtl_ensure_firmware_dir(dir);
-    CHECK(n >= 0, "ensure creates dir (%d)", n);
-    CHECK(n >= 1, "ensure writes at least the fw blob (%d)", n);
-    snprintf(path, sizeof path, "%s/rtl8761bu_fw.bin", dir);
-    CHECK(stat(path, &st) == 0 && st.st_size == 44484, "rtl8761bu_fw.bin size");
-    snprintf(path, sizeof path, "%s/rtl8761bu_config.bin", dir);
-    CHECK(stat(path, &st) == 0 && st.st_size == 6, "rtl8761bu_config.bin size");
+    CHECK(n == (int)HB_RTL_FW_BLOB_COUNT, "ensure writes every bundled blob (%d/%u)",
+          n, (unsigned)HB_RTL_FW_BLOB_COUNT);
+    for (i = 0; i < HB_RTL_FW_BLOB_COUNT; i++) {
+        snprintf(path, sizeof path, "%s/%s", dir, hb_rtl_fw_blobs[i].name);
+        CHECK(stat(path, &st) == 0 && (size_t)st.st_size == hb_rtl_fw_blobs[i].len,
+              "%s installed with the right size", hb_rtl_fw_blobs[i].name);
+    }
     n = hb_rtl_ensure_firmware_dir(dir);
     CHECK(n == 0, "second ensure is a no-op when sizes match (%d)", n);
 }

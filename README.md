@@ -60,16 +60,16 @@ ugen1.2     # one specific ugen node
 
 ### Realtek ROM-only adapters
 
-Some Realtek sticks start in ROM mode and need a patch before they can scan. HearBridge uploads it the same way Linux `btrtl` does. For RTL8761BU the files are bundled:
+Some Realtek sticks start in ROM mode and need a patch before they can scan. HearBridge uploads it the same way Linux `btrtl` does. Blobs for every USB part in the loader's chip table are bundled and written under `/data/hearbridge/firmware/` on start, e.g.:
 
 ```text
 /data/hearbridge/firmware/rtl8761bu_fw.bin
 /data/hearbridge/firmware/rtl8761bu_config.bin
 ```
 
-Other Realtek USB parts the loader knows still need their blobs from
+Only RTL8761BU has been tested on PS5 hardware. The rest use the same
 [`linux-firmware` `rtl_bt`](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/rtl_bt)
-placed under `/data/hearbridge/firmware/`. Only RTL8761BU has been tested on hardware.
+files and `btrtl` formats.
 
 ## Build
 

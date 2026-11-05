@@ -13,8 +13,37 @@ DST = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "src", "rtl_fw_bl
 # payload stays small; other chips can still use a manual copy under
 # /data/hearbridge/firmware/.
 BUNDLED = [
+    "rtl8723b_fw.bin",
+    "rtl8723b_config.bin",
+    "rtl8723d_fw.bin",
+    "rtl8723d_config.bin",
+    "rtl8821a_fw.bin",
+    "rtl8821a_config.bin",
+    "rtl8821c_fw.bin",
+    "rtl8821c_config.bin",
+    "rtl8761a_fw.bin",
+    "rtl8761a_config.bin",
     "rtl8761bu_fw.bin",
     "rtl8761bu_config.bin",
+    "rtl8761cu_fw.bin",
+    "rtl8761cu_config.bin",
+    "rtl8822b_fw.bin",
+    "rtl8822b_config.bin",
+    "rtl8822cu_fw.bin",
+    "rtl8822cu_config.bin",
+    "rtl8852au_fw.bin",
+    "rtl8852au_config.bin",
+    "rtl8852bu_fw.bin",
+    "rtl8852bu_config.bin",
+    "rtl8852cu_fw.bin",
+    "rtl8852cu_fw_v2.bin",
+    "rtl8852cu_config.bin",
+    "rtl8851bu_fw.bin",
+    "rtl8851bu_config.bin",
+    "rtl8922au_fw.bin",
+    "rtl8922au_config.bin",
+    "rtl8852btu_fw.bin",
+    "rtl8852btu_config.bin",
 ]
 
 def c_array(name, data):

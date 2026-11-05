@@ -9,10 +9,27 @@ and redistributed under
 On start, HearBridge writes any missing or outdated copies to
 `/data/hearbridge/firmware/` on the console.
 
-Currently shipped:
+Every USB part in `src/bt/realtek_fw.c`'s chip table is shipped:
 
-- `rtl8761bu_fw.bin`
-- `rtl8761bu_config.bin`
+- `rtl8723b_fw.bin` / `rtl8723b_config.bin`
+- `rtl8723d_fw.bin` / `rtl8723d_config.bin`
+- `rtl8821a_fw.bin` / `rtl8821a_config.bin`
+- `rtl8821c_fw.bin` / `rtl8821c_config.bin`
+- `rtl8761a_fw.bin` / `rtl8761a_config.bin`
+- `rtl8761bu_fw.bin` / `rtl8761bu_config.bin`
+- `rtl8761cu_fw.bin` / `rtl8761cu_config.bin`
+- `rtl8822b_fw.bin` / `rtl8822b_config.bin`
+- `rtl8822cu_fw.bin` / `rtl8822cu_config.bin`
+- `rtl8852au_fw.bin` / `rtl8852au_config.bin`
+- `rtl8852bu_fw.bin` / `rtl8852bu_config.bin`
+- `rtl8852cu_fw.bin` + `rtl8852cu_fw_v2.bin` / `rtl8852cu_config.bin`
+- `rtl8851bu_fw.bin` / `rtl8851bu_config.bin`
+- `rtl8922au_fw.bin` / `rtl8922au_config.bin`
+- `rtl8852btu_fw.bin` / `rtl8852btu_config.bin`
 
-These cover the RTL8761BU sticks tested with HearBridge (TP-Link UB500/UB600,
-USB id `0BDA:B00C` / `0BDA:8771`).
+`linux-firmware` ships several of those config names as symlinks to another
+config (for example `rtl8761a_config.bin` -> `rtl8761bu_config.bin`); the
+copies here are resolved so the loader always finds a regular file.
+
+Only RTL8761BU has been tested on PS5 hardware. The other chips are built
+from the same `btrtl` table and file formats.
